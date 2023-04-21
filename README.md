@@ -13,4 +13,4 @@ means.
 
 
 ## Instructions:
-Create a script, encrypt the script, and keep the encryption key safe (set as a locale environment variable or use the .env file). Upload the encrypted file to the interwebs, use an environment variable or local .env file to decrypt the script.
+Create a script, encrypt the script, and keep the encryption key safe (set as a local environment variable or use the .env file). Upload the encrypted file to the interwebs, use an environment variable or local .env file to decrypt the script.
