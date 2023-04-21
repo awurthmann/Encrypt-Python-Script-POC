@@ -8,7 +8,7 @@ def decrypt_string(encrypted_string: str, secret: str) -> str:
     return Fernet(secret.encode()).decrypt(encrypted_string.encode()).decode()
 
 
-def execute_encrypted_script(env_var="PROJECT_SECRET"):
+def execute_encrypted_script(env_var: str):
     """Decrypts scrypt using provided environment variable then executes it"""
     load_dotenv()   # Load .env files in project directory
     key = getenv(env_var)
@@ -19,4 +19,4 @@ def execute_encrypted_script(env_var="PROJECT_SECRET"):
     exec(decrypt_string(encrypted_text, key))
 
 
-execute_encrypted_script()
+execute_encrypted_script("PROJECT_SECRET")
