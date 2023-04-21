@@ -13,7 +13,7 @@ def encrypt_string(plaintext: str, secret: str) -> str:
     return Fernet(secret.encode()).encrypt(plaintext.encode()).decode()
 
 
-def save_key_as_env(env_var="PROJECT_SECRET", fernet_key=generate_fernet_key()):
+def save_key_as_env(env_var, fernet_key=generate_fernet_key()):
     """Saves Fernet key to .env file, default generates a new key"""
     # Ensure that .env files are included in the project/repo's .gitignore file
     with open(".env", mode="w") as env_file:
@@ -33,7 +33,7 @@ def save_encrypted_script(text, key, file="encrypted_script.txt"):
         encrypted_file.write(encrypted_string)
 
 
-save_key_as_env()
+save_key_as_env("PROJECT_SECRET")
 load_dotenv()
 plaintext = load_plaintext()
 envkey = getenv("PROJECT_SECRET")
