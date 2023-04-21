@@ -1,0 +1,10 @@
+# This is a sample Python script.
+
+
+def print_hi(name):
+    print(f'Hi, {name}')
+
+
+if __name__ == '__main__':
+    your_name = input("What is your name? ")
+    print_hi(your_name)
