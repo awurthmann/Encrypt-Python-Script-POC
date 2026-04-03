@@ -1,16 +1,49 @@
 # Encrypt-Python-Script-POC
-I occasionally need to post sensitive code to public repositories for "testing and educational" purposes.  I created these two scripts as a Proof of Concept to support that effort.
 
+A proof-of-concept two-script system for encrypting sensitive Python scripts before sharing them publicly, using [Fernet](https://cryptography.io/en/latest/fernet/) symmetric encryption.
+
+## Use Case
+
+Sometimes sensitive scripts need to be shared publicly (e.g., for testing or educational purposes). This POC lets you encrypt the script, publish only the encrypted version, and decrypt it locally using an environment variable or `.env` file for the key.
+
+## How It Works
+
+**Encrypt (`encrypt_script.py`):**
+1. Generates a Fernet encryption key
+2. Saves the key to a `.env` file as `PROJECT_SECRET`
+3. Reads `plaintext_script.txt`
+4. Writes the encrypted contents to `encrypted_script.txt`
+
+**Decrypt (`decrypt_script.py`):**
+1. Loads `PROJECT_SECRET` from the environment or `.env` file
+2. Reads `encrypted_script.txt`
+3. Decrypts and executes (or saves) the original script
+
+## Usage
+
+```bash
+# Step 1: Encrypt your script
+python3 encrypt_script.py
+
+# Step 2: Share encrypted_script.txt publicly
+# Keep .env (with PROJECT_SECRET) private — add it to .gitignore
+
+# Step 3: Decrypt on the target machine
+python3 decrypt_script.py
+```
+
+## Requirements
+
+```bash
+pip install cryptography python-dotenv
+```
+
+## Security Notes
+
+- **Never commit `.env` to version control** — add it to `.gitignore`
+- Alternatively, set `PROJECT_SECRET` as a system environment variable instead of using `.env`
+- Fernet encryption is symmetric — the same key encrypts and decrypts
 
 ## Legal
-You the executor, runner, user accept all liability.
-This code comes with ABSOLUTELY NO WARRANTY.
-This is free and unencumbered software released into the public domain.
-Anyone is free to copy, modify, publish, use, compile, sell, or
-distribute this software, either in source code form or as a compiled
-binary, for any purpose, commercial or non-commercial, and by any
-means.
 
-
-## Instructions:
-Create a script, encrypt the script, and keep the encryption key safe (set as a local environment variable or use the .env file). Upload the encrypted file to the interwebs, use an environment variable or local .env file to decrypt the script.
+This code comes with ABSOLUTELY NO WARRANTY. Released into the public domain — free to copy, modify, publish, use, compile, sell, or distribute for any purpose.
